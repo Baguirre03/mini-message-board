@@ -1,5 +1,12 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1= Messages
+  p Welcome to my #{title}
+  div(class='container')
+    each val in messages
+      ul
+        li= val.user 
+        li= val.text 
+        li= val.added
+    
