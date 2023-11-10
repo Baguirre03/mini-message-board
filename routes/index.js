@@ -21,6 +21,10 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Mini Message Board', messages: messages});
 });
 
+router.post('/', (req, res) => {
+  res.redirect('/new')
+})
+
 router.get('/new', function(req, res, next) {
   res.render('form', {title: 'New form'})
 })
