@@ -5,7 +5,7 @@ const Schema = mongoose.Schema
 const MessageSchema = new Schema({
     author: {type: String},
     message: {type: String, required: true, maxLength: 200},
-    date: {type: date},
+    date: {type: Date},
 })
 
-module.export = mongoose.model("Message", MessageSchema)
+module.exports = mongoose.model("Message", MessageSchema)

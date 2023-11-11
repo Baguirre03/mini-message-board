@@ -1,25 +1,40 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = requrie("mongoose")
-const Message = require('./models/message')
+const mongoose = require("mongoose")
+const Message = require('../models/message')
 mongoose.set("strictQuery", false)
 
 const mongoDB = process.env.SECRET_KEY
 main().catch((err) => console.log(err));
 
-const messages = []
+  
+async function main() {
+  console.log("Debug: About to connect");
+  await mongoose.connect(mongoDB);
+  console.log("Debug: Should be connected?");
+}
 
 async function messageCreate(author, message, date) {
   const messagedetail = {author: author, message: message, date: date}
-  const message = new Message(messagedetail)
+  const messageFinal = new Message(messagedetail)
 
-  await message.save()
-  messages.push(message)
+  await messageFinal.save()
   console.log(`Sent message: ${message} by ${author}`)
 }
 
+async function getMessages() {
+  try { 
+    const messages = await Message.find().sort({date: -1})
+    return messages
+  } catch(err) {
+    console.log(err)
+  }
+}
+
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', async function(req, res, next) {
+  const messages = await getMessages()
+  console.log(`messages recieved: ${messages}`)
   res.render('index', { title: 'Mini Message Board', messages: messages});
 });
 

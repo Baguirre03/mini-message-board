@@ -1,12 +1,14 @@
 extends layout
 
 block content
-    h1 New Message!
-        form(method="POST", action="/new") 
-            p Name:
-                span 
-                input(type="text", name="name", value='')
-            p Message: 
-                span 
-                input(type="text", name="message", value='')
-            input(type="submit", value="Submit")
+    div(class='form')
+        h1 Add a new message!
+        div
+            form(method="POST", action="/new") 
+                span(class='form-el')
+                    p= 'Name: '
+                    input(type="text", name="author", value='')
+                span(class='form-el')
+                    p= 'Message: '
+                    input(type="text", name="message", value='')
+                input(type="submit", value="Submit", class='button')

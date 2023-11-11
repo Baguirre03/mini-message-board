@@ -1,14 +1,16 @@
 extends layout
 
 block content
-  h1= Messages
-  p Welcome to my #{title}
-  div(class='container')
-    each val in messages
-      ul
-        li= val.user 
-        li= val.text 
-        li= val.added
+  h1 Welcome to my #{title}
   a(href="/new") Make a message! 
+  h3 Messages here:
+  div(class='container')
+    if !messages 
+      div make the first message!
+    else 
+      each val in messages
+        ul(class="message")
+          li <strong>#{val.author}</strong> - #{val.date}
+          li #{val.message}
 
     
