@@ -34,7 +34,6 @@ async function getMessages() {
 /* GET home page. */
 router.get('/', async function(req, res, next) {
   const messages = await getMessages()
-  console.log(`messages recieved: ${messages}`)
   res.render('index', { title: 'Mini Message Board', messages: messages});
 });
 
